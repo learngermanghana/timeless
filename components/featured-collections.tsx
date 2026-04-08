@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "@/components/section-heading";
 import { featuredCollections } from "@/lib/data";
-import { WHATSAPP_URL } from "@/lib/constants";
 
 export default function FeaturedCollections() {
   return (
@@ -30,14 +30,12 @@ export default function FeaturedCollections() {
               <div className="space-y-3 p-5">
                 <h3 className="text-xl font-semibold text-brand-secondary">{collection.title}</h3>
                 <p className="text-sm leading-relaxed text-brand-secondary/70">{collection.description}</p>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  href={`/collections/${collection.id}`}
                   className="inline-flex rounded-full bg-brand-primary px-4 py-2 text-sm font-semibold text-brand-light transition hover:bg-brand-secondary"
                 >
                   {collection.ctaLabel}
-                </a>
+                </Link>
               </div>
             </article>
           ))}
