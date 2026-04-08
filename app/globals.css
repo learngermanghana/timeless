@@ -4,6 +4,8 @@
 
 :root {
   color-scheme: light;
+  --font-sans: Inter, "Avenir Next", Avenir, "Segoe UI", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", Garamond, Baskerville, Georgia, serif;
 }
 
 body {

@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { BRAND_NAME, SITE_URL } from "@/lib/constants";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const cormorant = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-serif", weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,7 +36,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${cormorant.variable} bg-brand-light font-sans text-brand-secondary antialiased`}>
+      <body className="bg-brand-light font-sans text-brand-secondary antialiased">
         {children}
       </body>
     </html>
