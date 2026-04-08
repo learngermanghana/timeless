@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_URL } from "@/lib/constants";
+import Link from "next/link";
+import { PHONE_DISPLAY, PHONE_E164 } from "@/lib/constants";
 
 export default function Hero() {
   return (
@@ -18,14 +19,12 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/shop"
               className="rounded-full bg-brand-accent px-6 py-3 text-sm font-semibold text-brand-secondary transition hover:brightness-95"
             >
-              Order on WhatsApp
-            </a>
+              Shop catalog
+            </Link>
             <a
               href={`tel:${PHONE_E164}`}
               className="rounded-full border border-brand-light/30 px-6 py-3 text-sm font-semibold text-brand-light transition hover:bg-brand-light/10"

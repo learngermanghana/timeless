@@ -1,8 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "@/components/section-heading";
 import { bestsellers } from "@/lib/data";
 import { formatPriceGHS } from "@/lib/format";
-import { WHATSAPP_URL } from "@/lib/constants";
 
 export default function BestsellersGrid() {
   return (
@@ -34,14 +34,12 @@ export default function BestsellersGrid() {
                 <p className="mt-2 text-sm text-brand-secondary/75">{product.description}</p>
                 <div className="mt-4 flex items-center justify-between">
                   <p className="text-lg font-bold text-brand-primary">{formatPriceGHS(product.price)}</p>
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noreferrer"
+                  <Link
+                    href={`/shop/${product.id}`}
                     className="rounded-full bg-brand-primary px-4 py-2 text-sm font-semibold text-brand-light transition hover:bg-brand-secondary"
                   >
-                    Order via WhatsApp
-                  </a>
+                    View details
+                  </Link>
                 </div>
               </div>
             </article>

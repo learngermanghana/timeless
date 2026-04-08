@@ -1,10 +1,11 @@
 import { BRAND_NAME, MAPS_URL, PHONE_DISPLAY, PHONE_E164, WHATSAPP_URL } from "@/lib/constants";
 
 const quickLinks = [
-  { label: "Collections", href: "#collections" },
-  { label: "Bestsellers", href: "#bestsellers" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" }
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/shop" },
+  { label: "Collections", href: "/#collections" },
+  { label: "Bestsellers", href: "/#bestsellers" },
+  { label: "Contact", href: "/#contact" }
 ];
 
 export default function Footer() {
