@@ -11,6 +11,7 @@ export interface ProductItem {
   name: string;
   description: string;
   category: string;
+  scentFamily: string;
   price: number;
   image: string;
 }
@@ -84,6 +85,7 @@ export const bestsellers: ProductItem[] = [
     name: "Oud Royale",
     description: "A luxurious oud accord wrapped in saffron and smoky vanilla.",
     category: "Unisex",
+    scentFamily: "Woody",
     price: 690,
     image:
       "https://images.unsplash.com/photo-1595425964078-6f4f8dbf1e30?auto=format&fit=crop&w=1200&q=80"
@@ -93,6 +95,7 @@ export const bestsellers: ProductItem[] = [
     name: "Velvet Bloom",
     description: "Soft rose petals, white musk and creamy sandalwood for timeless femininity.",
     category: "Women",
+    scentFamily: "Floral",
     price: 540,
     image:
       "https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&w=1200&q=80"
@@ -102,6 +105,7 @@ export const bestsellers: ProductItem[] = [
     name: "Amber Muse",
     description: "Warm amber resin with citrus spark and cedar for elevated everyday wear.",
     category: "Unisex",
+    scentFamily: "Amber",
     price: 610,
     image:
       "https://images.unsplash.com/photo-1619994403073-2cec0f87aa0f?auto=format&fit=crop&w=1200&q=80"
@@ -111,6 +115,7 @@ export const bestsellers: ProductItem[] = [
     name: "Midnight Noir",
     description: "Dark plum, black pepper and leather notes for a modern evening aura.",
     category: "Men",
+    scentFamily: "Spicy",
     price: 580,
     image:
       "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=1200&q=80"
@@ -120,6 +125,7 @@ export const bestsellers: ProductItem[] = [
     name: "Soft Gold",
     description: "A luminous blend of jasmine, pear and golden amber with smooth depth.",
     category: "Women",
+    scentFamily: "Floral",
     price: 520,
     image:
       "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=1200&q=80"
@@ -129,6 +135,7 @@ export const bestsellers: ProductItem[] = [
     name: "Timeless Signature Oil",
     description: "Concentrated perfume oil with clean musk and creamy woods.",
     category: "Perfume Oils",
+    scentFamily: "Fresh",
     price: 260,
     image:
       "https://images.unsplash.com/photo-1580870069867-74c57ee1bb07?auto=format&fit=crop&w=1200&q=80"
