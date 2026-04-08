@@ -73,6 +73,15 @@ Fields:
 - `WHATSAPP_URL`
 - `MAPS_URL`
 
+## Static Assets (public folder)
+
+Place static files (images, icons, robots.txt, etc.) in `public/`.
+
+Example paths:
+
+- `public/favicon.ico` → `/favicon.ico`
+- `public/images/hero.jpg` → `/images/hero.jpg`
+
 ## Notes
 
 - Remote images are configured in `next.config.ts` (`images.unsplash.com`).
