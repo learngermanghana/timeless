@@ -1,6 +1,6 @@
 # Timeless Perfume Website
 
-A premium, mobile-first Next.js website for **Timeless Perfume**, a luxury fragrance brand in Ghana. The site is designed for elegant product showcasing, WhatsApp ordering, and easy customer contact.
+A premium, mobile-first Next.js website for **Timeless Perfume**, a luxury fragrance brand in Ghana. The site is designed for elegant product showcasing, WhatsApp ordering, and easy customer contact..
 
 ## Tech Stack
 
