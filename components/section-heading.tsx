@@ -1,20 +1,18 @@
-interface SectionHeadingProps {
+import { cn } from '@/lib/utils';
+
+type SectionHeadingProps = {
   eyebrow?: string;
   title: string;
   description?: string;
-  center?: boolean;
-}
+  className?: string;
+};
 
-export default function SectionHeading({ eyebrow, title, description, center = false }: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, title, description, className }: SectionHeadingProps) {
   return (
-    <header className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      {eyebrow ? (
-        <p className="mb-3 inline-flex rounded-full border border-brand-accent/40 bg-brand-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-primary">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2 className="text-3xl font-semibold tracking-tight text-brand-secondary sm:text-4xl">{title}</h2>
-      {description ? <p className="mt-4 text-base text-brand-secondary/75 sm:text-lg">{description}</p> : null}
-    </header>
+    <div className={cn('mx-auto max-w-3xl text-center', className)}>
+      {eyebrow ? <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">{eyebrow}</p> : null}
+      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--color-foreground)] sm:text-4xl">{title}</h2>
+      {description ? <p className="mt-4 text-base text-[var(--color-muted)] sm:text-lg">{description}</p> : null}
+    </div>
   );
 }

@@ -1,88 +1,106 @@
-# Timeless Perfume Website
+# Condolence GH Website
 
-A premium, mobile-first Next.js website for **Timeless Perfume**, a luxury fragrance brand in Ghana. The site is designed for elegant product showcasing, WhatsApp ordering, and easy customer contact..
+Production-ready Next.js website for **Condolence GH**, a funeral-printing and memorial-print services sub-brand of **247 PRINT HOUSE** in Ghana.
 
-## Tech Stack
+## Project Overview
+
+This website is built to advertise funeral printing services and capture customer enquiries for:
+
+- Funeral brochures
+- Funeral posters
+- Funeral banners
+- Funeral invitation cards
+- Obituary/memorial cards
+- Appreciation cards
+- One-week observance and thanksgiving print materials
+- Custom funeral print jobs
+
+The design language is respectful, calm, and premium, using muted tones suited for memorial communication.
+
+## Stack
 
 - Next.js (App Router)
+- React
 - TypeScript
-- Tailwind CSS
-- Optimized for Vercel deployment
+- Tailwind CSS (v4 via `@tailwindcss/postcss`)
+- ESLint (`eslint-config-next`)
+- `clsx` + `tailwind-merge`
+- `lucide-react`
+- `@vercel/analytics`
+- `@vercel/speed-insights`
 
-## Required Setup
+## Routes
 
-1. Install Node.js 20+.
-2. Copy environment variables:
+- `/`
+- `/services`
+- `/products`
+- `/funeral-brochures`
+- `/funeral-posters`
+- `/funeral-banners`
+- `/quote`
+- `/about`
+- `/contact`
+- `/gallery`
+- `/faq`
+- `/privacy-policy`
+- `/terms`
+- `/thank-you`
+- `/funeral-invitations`
+- `/appreciation-cards`
+
+## Node Version
+
+Use **Node.js 20.11+** (or newer LTS) for local development and Vercel builds.
+
+## Environment Variables
+
+Copy and customize environment variables:
 
 ```bash
 cp .env.example .env.local
 ```
 
-3. Install dependencies:
+Current variables:
+
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_CONTACT_PHONE`
+- `NEXT_PUBLIC_WHATSAPP`
+- `NEXT_PUBLIC_CONTACT_EMAIL`
+
+## Local Development
 
 ```bash
 npm install
-```
-
-## Run Locally
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Visit `http://localhost:3000`.
 
-## Build for Production
+## Production Build
 
 ```bash
+npm run lint
 npm run build
 npm run start
 ```
 
 ## Deploy to Vercel
 
-1. Push this project to GitHub.
+1. Push this repository to GitHub/GitLab/Bitbucket.
 2. Import the repository in Vercel.
-3. Add environment variable:
-   - `NEXT_PUBLIC_SITE_URL` (your live domain, e.g. `https://your-domain.vercel.app`)
+3. Set the environment variables from `.env.example` in Vercel Project Settings.
 4. Deploy.
 
-## Where to Change Product and Content Data
+No custom server is required; the project is App Router and Vercel compatible by default.
 
-All local sample content lives in:
+## Where to Replace Business Content
 
-- `lib/data.ts`
-
-Update these arrays there:
-
-- `featuredCollections`
-- `bestsellers`
-- `benefits`
-- `galleryItems`
-
-## Where to Update Phone, WhatsApp, and Map Link
-
-Update these constants in:
-
-- `lib/constants.ts`
-
-Fields:
-
-- `PHONE_DISPLAY`
-- `PHONE_E164`
-- `WHATSAPP_URL`
-- `MAPS_URL`
-
-## Static Assets (public folder)
-
-Place static files (images, icons, robots.txt, etc.) in `public/`.
-
-Example paths:
-
-- `public/favicon.ico` → `/favicon.ico`
-- `public/images/hero.jpg` → `/images/hero.jpg`
+- Contact details: `lib/constants.ts`
+- SEO metadata logic: `lib/metadata.ts`
+- Service/product/gallery/FAQ content: `lib/data.ts`
+- Branding colors and global styles: `app/globals.css`
 
 ## Notes
 
-- Remote images are configured in `next.config.ts` (`images.unsplash.com`).
-- SEO metadata is configured in `app/layout.tsx`.
+- Remote image usage is configured in `next.config.ts` for `images.unsplash.com`.
+- The quote form is frontend-only and routes users to `/thank-you`; connect API handling when ready.

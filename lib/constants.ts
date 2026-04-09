@@ -1,9 +1,18 @@
-export const BRAND_NAME = "Timeless Perfume";
-export const PHONE_DISPLAY = "059 256 6302";
-export const PHONE_E164 = "+233592566302";
-export const WHATSAPP_URL =
-  "https://wa.me/233592566302?text=Hello%20Timeless%20Perfume%2C%20I%20would%20like%20to%20place%20an%20order.";
-export const MAPS_URL =
-  "https://www.google.com/maps/search/timeless+perfume/@5.570419,-0.2744875,11z?entry=s&sa=X&ved=1t%3A199789";
+export const SITE_NAME = 'Condolence GH';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.condolencegh.com';
+export const PHONE_DISPLAY = process.env.NEXT_PUBLIC_CONTACT_PHONE ?? '+233 24 000 0000';
+export const PHONE_RAW = PHONE_DISPLAY.replace(/\s+/g, '');
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP ?? '+233240000000';
+export const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'hello@condolencegh.com';
+export const ADDRESS = 'Circle Industrial Area, Accra, Ghana';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://timeless-perfume.vercel.app";
+export const NAV_LINKS = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/products', label: 'Products' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/quote', label: 'Quote' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/faq', label: 'FAQ' }
+];

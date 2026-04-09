@@ -1,21 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 :root {
-  color-scheme: light;
-  --font-sans: Inter, "Avenir Next", Avenir, "Segoe UI", Arial, sans-serif;
-  --font-serif: "Cormorant Garamond", Garamond, Baskerville, Georgia, serif;
+  --color-background: #f8f5ef;
+  --color-foreground: #1f1f1f;
+  --color-ivory: #f3eee4;
+  --color-muted: #5f5b53;
+  --color-accent: #c4a664;
+  --color-aux: #3a4c43;
+}
+
+* {
+  border-color: color-mix(in oklab, var(--color-foreground) 10%, transparent);
 }
 
 body {
-  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
-.font-serif {
-  font-family: var(--font-serif), Georgia, serif;
+main {
+  min-height: 60vh;
 }
 
-.font-sans {
-  font-family: var(--font-sans), system-ui, sans-serif;
+.container-shell {
+  margin-inline: auto;
+  max-width: 72rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-shell {
+    padding-inline: 2rem;
+  }
 }
