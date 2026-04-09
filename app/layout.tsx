@@ -1,43 +1,22 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { BRAND_NAME, SITE_URL } from "@/lib/constants";
+import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import './globals.css';
+import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
+import { buildMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: `${BRAND_NAME} | Luxury Perfume Shop in Ghana`,
-  description:
-    "Timeless Perfume is a premium perfume shop in Accra, Ghana for luxury fragrances, perfume oils, gift-worthy scents and elegant signature collections.",
-  keywords: [
-    "Timeless Perfume Ghana",
-    "perfume shop in Accra",
-    "luxury perfumes in Ghana",
-    "perfume oils Ghana",
-    "men’s perfume Ghana",
-    "women’s perfume Ghana",
-    "unisex fragrances Ghana",
-    "original perfume in Accra"
-  ],
-  openGraph: {
-    title: `${BRAND_NAME} | Luxury Perfumes in Ghana`,
-    description:
-      "Discover premium fragrances for men and women, gift sets, perfume oils and signature scents from Timeless Perfume.",
-    url: SITE_URL,
-    siteName: BRAND_NAME,
-    type: "website"
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${BRAND_NAME} | Luxury Perfumes in Ghana`,
-    description:
-      "Shop elegant fragrances in Accra with easy WhatsApp ordering, premium collections and gift-ready scents."
-  }
-};
+export const metadata: Metadata = buildMetadata('Funeral Printing in Ghana', 'Condolence GH offers trusted memorial printing services including funeral brochures, posters, banners, and obituary cards in Ghana.', '/');
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-brand-light font-sans text-brand-secondary antialiased">
-        {children}
+      <body>
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

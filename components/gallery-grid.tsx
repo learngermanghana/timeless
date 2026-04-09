@@ -1,25 +1,21 @@
-import Image from "next/image";
-import SectionHeading from "@/components/section-heading";
-import { galleryItems } from "@/lib/data";
+import Image from 'next/image';
 
-export default function GalleryGrid() {
+type GalleryItem = {
+  src: string;
+  alt: string;
+};
+
+export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   return (
-    <section className="bg-brand-light px-4 py-16 sm:px-6 lg:px-8" id="gallery">
-      <div className="mx-auto max-w-7xl">
-        <SectionHeading
-          eyebrow="Brand Experience"
-          title="The Timeless Perfume boutique mood"
-          description="A glimpse of fragrance artistry, gift-ready elegance and modern luxury in Accra."
-          center
-        />
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {galleryItems.map((item) => (
-            <figure key={item.id} className="relative h-44 overflow-hidden rounded-2xl shadow-soft md:h-60">
-              <Image src={item.image} alt={item.alt} fill className="object-cover transition duration-500 hover:scale-105" />
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => (
+        <figure key={item.src} className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
+          <div className="relative h-56 w-full">
+            <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 33vw" />
+          </div>
+          <figcaption className="p-4 text-sm text-[var(--color-muted)]">{item.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
   );
 }
