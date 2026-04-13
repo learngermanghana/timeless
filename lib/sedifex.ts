@@ -60,22 +60,24 @@ function normalizePromoRecord(raw: unknown): SedifexPromo | null {
 function normalizeGalleryItems(raw: unknown): SedifexGalleryItem[] {
   if (!Array.isArray(raw)) return [];
 
-  return raw
-    .map((item) => {
-      if (!item || typeof item !== 'object') return null;
-      const record = item as Record<string, unknown>;
+  return raw.reduce<SedifexGalleryItem[]>((items, item) => {
+    if (!item || typeof item !== 'object') return items;
+    const record = item as Record<string, unknown>;
+    const url = typeof record.url === 'string' ? record.url : undefined;
+    if (!url) return items;
 
-      return {
-        url: typeof record.url === 'string' ? record.url : undefined,
-        alt: typeof record.alt === 'string' ? record.alt : undefined,
-        caption: typeof record.caption === 'string' ? record.caption : undefined,
-        sortOrder: typeof record.sortOrder === 'number' ? record.sortOrder : undefined,
-        isPublished: typeof record.isPublished === 'boolean' ? record.isPublished : undefined,
-        createdAt: typeof record.createdAt === 'string' ? record.createdAt : undefined,
-        updatedAt: typeof record.updatedAt === 'string' ? record.updatedAt : undefined
-      } satisfies SedifexGalleryItem;
-    })
-    .filter((item): item is SedifexGalleryItem => Boolean(item?.url));
+    items.push({
+      url,
+      alt: typeof record.alt === 'string' ? record.alt : undefined,
+      caption: typeof record.caption === 'string' ? record.caption : undefined,
+      sortOrder: typeof record.sortOrder === 'number' ? record.sortOrder : undefined,
+      isPublished: typeof record.isPublished === 'boolean' ? record.isPublished : undefined,
+      createdAt: typeof record.createdAt === 'string' ? record.createdAt : undefined,
+      updatedAt: typeof record.updatedAt === 'string' ? record.updatedAt : undefined
+    });
+
+    return items;
+  }, []);
 }
 
 function deduplicateProducts(products: SedifexProduct[]) {
