@@ -38,6 +38,46 @@ async function sedifexFetch<T>(endpoint: string): Promise<T | null> {
   return (await response.json()) as T;
 }
 
+function normalizePromoRecord(raw: unknown): SedifexPromo | null {
+  if (!raw || typeof raw !== 'object') return null;
+
+  const candidate = raw as Record<string, unknown>;
+  const promoTitle = typeof candidate.promoTitle === 'string' ? candidate.promoTitle : undefined;
+  if (!promoTitle) return null;
+
+  return {
+    promoTitle,
+    promoSummary: typeof candidate.promoSummary === 'string' ? candidate.promoSummary : undefined,
+    promoStartDate: typeof candidate.promoStartDate === 'string' ? candidate.promoStartDate : undefined,
+    promoEndDate: typeof candidate.promoEndDate === 'string' ? candidate.promoEndDate : undefined,
+    promoSlug: typeof candidate.promoSlug === 'string' ? candidate.promoSlug : undefined,
+    promoWebsiteUrl: typeof candidate.promoWebsiteUrl === 'string' ? candidate.promoWebsiteUrl : undefined,
+    displayName: typeof candidate.displayName === 'string' ? candidate.displayName : undefined,
+    name: typeof candidate.name === 'string' ? candidate.name : undefined
+  };
+}
+
+function normalizeGalleryItems(raw: unknown): SedifexGalleryItem[] {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .map((item) => {
+      if (!item || typeof item !== 'object') return null;
+      const record = item as Record<string, unknown>;
+
+      return {
+        url: typeof record.url === 'string' ? record.url : undefined,
+        alt: typeof record.alt === 'string' ? record.alt : undefined,
+        caption: typeof record.caption === 'string' ? record.caption : undefined,
+        sortOrder: typeof record.sortOrder === 'number' ? record.sortOrder : undefined,
+        isPublished: typeof record.isPublished === 'boolean' ? record.isPublished : undefined,
+        createdAt: typeof record.createdAt === 'string' ? record.createdAt : undefined,
+        updatedAt: typeof record.updatedAt === 'string' ? record.updatedAt : undefined
+      } satisfies SedifexGalleryItem;
+    })
+    .filter((item): item is SedifexGalleryItem => Boolean(item?.url));
+}
+
 function deduplicateProducts(products: SedifexProduct[]) {
   const map = new Map<string, SedifexProduct>();
   for (const product of products) {
@@ -70,8 +110,9 @@ export async function getSedifexProducts() {
 export async function getSedifexPromo() {
   try {
     const result = await sedifexFetch<IntegrationPromoResponse>('/v1IntegrationPromo');
-    if (!result?.promo) return fallbackPromo;
-    return result.promo;
+    const promo = normalizePromoRecord(result?.promo) ?? normalizePromoRecord(result);
+    if (!promo) return fallbackPromo;
+    return promo;
   } catch {
     return fallbackPromo;
   }
@@ -80,7 +121,9 @@ export async function getSedifexPromo() {
 export async function getSedifexGallery() {
   try {
     const result = await sedifexFetch<IntegrationGalleryResponse>('/integrationGallery');
-    const gallery = Array.isArray(result?.items) ? result.items : [];
+    const directItems = normalizeGalleryItems(result?.items);
+    const promoGalleryItems = normalizeGalleryItems((result as { promoGallery?: unknown } | null)?.promoGallery);
+    const gallery = directItems.length ? directItems : promoGalleryItems;
     if (!gallery.length) return fallbackGallery;
 
     return gallery
