@@ -1,21 +1,34 @@
 import { fallbackGallery, fallbackProducts, fallbackPromo } from '@/lib/fallback-data';
 import { buildWhatsAppLink } from '@/lib/constants';
-import type { SedifexGalleryItem, SedifexProduct, SedifexPromo } from '@/lib/types';
+import type {
+  IntegrationGalleryResponse,
+  IntegrationProductsResponse,
+  IntegrationPromoResponse,
+  SedifexGalleryItem,
+  SedifexProduct,
+  SedifexPromo
+} from '@/lib/types';
 
 const baseUrl = process.env.SEDIFEX_API_BASE_URL;
 const storeId = process.env.SEDIFEX_STORE_ID;
-const integrationKey = process.env.SEDIFEX_INTEGRATION_KEY;
+const integrationKey = process.env.SEDIFEX_INTEGRATION_API_KEY ?? process.env.SEDIFEX_INTEGRATION_KEY;
+const contractVersion = process.env.SEDIFEX_CONTRACT_VERSION ?? '2026-04-13';
 
-const headers = integrationKey
-  ? {
-      Authorization: `Bearer ${integrationKey}`
-    }
-  : undefined;
+function buildHeaders() {
+  if (!integrationKey) return undefined;
+
+  return {
+    'x-api-key': integrationKey,
+    'X-Sedifex-Contract-Version': contractVersion,
+    Accept: 'application/json'
+  };
+}
 
 async function sedifexFetch<T>(endpoint: string): Promise<T | null> {
+  const headers = buildHeaders();
   if (!baseUrl || !storeId || !headers) return null;
 
-  const response = await fetch(`${baseUrl}${endpoint}?storeId=${storeId}`, {
+  const response = await fetch(`${baseUrl}${endpoint}?storeId=${encodeURIComponent(storeId)}`, {
     headers,
     next: { revalidate: 60 }
   });
@@ -36,7 +49,7 @@ function deduplicateProducts(products: SedifexProduct[]) {
 
 export function groupProductsByCategory(products: SedifexProduct[]) {
   return products.reduce<Record<string, SedifexProduct[]>>((acc, product) => {
-    const category = product.category || 'General Care';
+    const category = product.category?.trim() || 'Uncategorized';
     acc[category] ??= [];
     acc[category].push(product);
     return acc;
@@ -45,9 +58,10 @@ export function groupProductsByCategory(products: SedifexProduct[]) {
 
 export async function getSedifexProducts() {
   try {
-    const result = await sedifexFetch<SedifexProduct[]>('/integrationProducts');
-    if (!result?.length) return fallbackProducts;
-    return deduplicateProducts(result);
+    const result = await sedifexFetch<IntegrationProductsResponse>('/v1IntegrationProducts');
+    const products = Array.isArray(result?.products) ? result.products : [];
+    if (!products.length) return fallbackProducts;
+    return deduplicateProducts(products);
   } catch {
     return fallbackProducts;
   }
@@ -55,9 +69,9 @@ export async function getSedifexProducts() {
 
 export async function getSedifexPromo() {
   try {
-    const promo = await sedifexFetch<SedifexPromo | SedifexPromo[]>('/integrationPromo');
-    if (!promo) return fallbackPromo;
-    return Array.isArray(promo) ? promo[0] ?? fallbackPromo : promo;
+    const result = await sedifexFetch<IntegrationPromoResponse>('/v1IntegrationPromo');
+    if (!result?.promo) return fallbackPromo;
+    return result.promo;
   } catch {
     return fallbackPromo;
   }
@@ -65,8 +79,10 @@ export async function getSedifexPromo() {
 
 export async function getSedifexGallery() {
   try {
-    const gallery = await sedifexFetch<SedifexGalleryItem[]>('/integrationGallery');
-    if (!gallery?.length) return fallbackGallery;
+    const result = await sedifexFetch<IntegrationGalleryResponse>('/integrationGallery');
+    const gallery = Array.isArray(result?.items) ? result.items : [];
+    if (!gallery.length) return fallbackGallery;
+
     return gallery
       .filter((item) => item.isPublished)
       .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
