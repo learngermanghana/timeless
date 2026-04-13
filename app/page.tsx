@@ -27,6 +27,18 @@ export default async function HomePage() {
   return (
     <div className='space-y-16 pb-20'>
       <HeroSection promo={promo} />
+      <section className='mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-2 md:px-6'>
+        <div className='space-y-6'>
+          <SectionHeading title='Special promo' description='Latest integration promo from Sedifex.' />
+          <PromoBanner promo={promo} />
+        </div>
+
+        <div className='space-y-6'>
+          <SectionHeading title='Store gallery' description='Latest integration gallery from Sedifex.' />
+          <GalleryGrid items={gallery.slice(0, 6)} />
+        </div>
+      </section>
+
       <section className='mx-auto max-w-7xl px-4 md:px-6'>
         <SectionHeading eyebrow='Categories' title='Shop by beauty category' description='Explore top categories curated for body care and skincare needs.' />
         <div className='mt-6 grid gap-4 md:grid-cols-3'>
@@ -57,18 +69,6 @@ export default async function HomePage() {
       </section>
 
       <section className='mx-auto max-w-7xl px-4 md:px-6'><CtaBanner /></section>
-
-      <section className='mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-2 md:px-6'>
-        <div className='space-y-6'>
-          <SectionHeading title='Special promo' description='Latest integration promo from Sedifex.' />
-          <PromoBanner promo={promo} />
-        </div>
-
-        <div className='space-y-6'>
-          <SectionHeading title='Store gallery' description='Latest integration gallery from Sedifex.' />
-          <GalleryGrid items={gallery.slice(0, 6)} />
-        </div>
-      </section>
 
       <section className='mx-auto max-w-7xl space-y-6 px-4 md:px-6'>
         <SectionHeading title='FAQs' />
