@@ -1,22 +1,14 @@
 import Link from 'next/link';
+import { WHATSAPP_LINK } from '@/lib/constants';
 
-type CtaBannerProps = {
-  title: string;
-  description: string;
-};
-
-export function CtaBanner({ title, description }: CtaBannerProps) {
+export function CtaBanner() {
   return (
-    <section className="rounded-3xl bg-[var(--color-foreground)] px-6 py-12 text-[var(--color-background)] sm:px-10">
-      <h2 className="text-2xl font-semibold sm:text-3xl">{title}</h2>
-      <p className="mt-3 max-w-2xl text-sm text-[color-mix(in_oklab,var(--color-background)_82%,black)] sm:text-base">{description}</p>
-      <div className="mt-6 flex flex-wrap gap-3">
-        <Link href="/quote" className="rounded-full bg-[var(--color-accent)] px-5 py-3 text-sm font-semibold text-black transition hover:opacity-90">
-          Request a Quote
-        </Link>
-        <Link href="/contact" className="rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">
-          Contact Team
-        </Link>
+    <section className='rounded-3xl bg-stone-900 px-6 py-10 text-white md:px-10'>
+      <h3 className='text-2xl font-semibold'>Need help building a routine?</h3>
+      <p className='mt-2 text-stone-200'>Speak with Prep N Prime GH for personalized body care and skincare recommendations.</p>
+      <div className='mt-5 flex gap-3'>
+        <Link href='/consultation' className='rounded-full bg-white px-5 py-2 text-sm font-medium text-stone-900'>Book Consultation</Link>
+        <a href={WHATSAPP_LINK} className='rounded-full border border-stone-400 px-5 py-2 text-sm font-medium'>WhatsApp Now</a>
       </div>
     </section>
   );

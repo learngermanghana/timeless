@@ -1,18 +1,20 @@
-export const SITE_NAME = 'Condolence GH';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.condolencegh.com';
-export const PHONE_DISPLAY = process.env.NEXT_PUBLIC_CONTACT_PHONE ?? '+233 24 000 0000';
-export const PHONE_RAW = PHONE_DISPLAY.replace(/\s+/g, '');
-export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP ?? '+233240000000';
-export const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? 'hello@condolencegh.com';
-export const ADDRESS = 'Circle Industrial Area, Accra, Ghana';
+export const BRAND_NAME = 'Prep N Prime GH';
+export const PHONE_DISPLAY = '024 468 0516';
+export const PHONE_E164 = '+233244680516';
+export const WHATSAPP_LINK =
+  'https://wa.me/233244680516?text=Hello%20Prep%20N%20Prime%20GH%2C%20I%20want%20to%20order%20your%20beauty%20products.';
+
+export const buildWhatsAppLink = (message: string) =>
+  `https://wa.me/233244680516?text=${encodeURIComponent(message)}`;
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/products', label: 'Products' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/quote', label: 'Quote' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/body-care', label: 'Body Care' },
+  { href: '/skin-care', label: 'Skin Care' },
+  { href: '/collections', label: 'Collections' },
+  { href: '/consultation', label: 'Consultation' },
+  { href: '/faq', label: 'FAQ' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/faq', label: 'FAQ' }
-];
+  { href: '/contact', label: 'Contact' }
+] as const;

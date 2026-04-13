@@ -1,41 +1,44 @@
 import type { Metadata } from 'next';
-import { SITE_NAME, SITE_URL } from './constants';
 
-const defaultDescription =
-  'Condolence GH provides professional funeral brochure, poster, banner, obituary card, and memorial printing services in Ghana.';
+const baseUrl = 'https://prep-n-prime-gh.vercel.app';
 
-export function buildMetadata(title: string, description = defaultDescription, path = '/'): Metadata {
-  const fullTitle = `${title} | ${SITE_NAME}`;
-  const url = `${SITE_URL}${path}`;
-  const keywords = [
-    'funeral printing in Ghana',
-    'funeral brochure printing Ghana',
-    'funeral poster printing Accra',
-    'funeral banner printing Ghana',
-    'obituary card printing Ghana',
-    'memorial printing services Ghana',
-    'funeral invitation cards Ghana'
-  ];
+export const defaultMetadata: Metadata = {
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Prep N Prime GH | Beauty Shop in Ghana',
+    template: '%s | Prep N Prime GH'
+  },
+  description:
+    'Shop authentic body care and skincare products in Ghana. Prep N Prime GH offers premium products, glow essentials, and consultation-led shopping.',
+  keywords: [
+    'beauty shop in Ghana',
+    'skincare products Ghana',
+    'body care products Ghana',
+    'authentic beauty products Ghana',
+    'sunscreen Ghana',
+    'face cleanser Ghana',
+    'body lotion Ghana',
+    'serums and skincare Ghana'
+  ],
+  openGraph: {
+    title: 'Prep N Prime GH',
+    description:
+      'Premium body products and skincare in Ghana with friendly consultation support.',
+    type: 'website',
+    locale: 'en_GH',
+    url: baseUrl,
+    siteName: 'Prep N Prime GH'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Prep N Prime GH',
+    description: 'Body care and skincare made simple, premium, and authentic.'
+  }
+};
 
-  return {
-    title: fullTitle,
-    description,
-    keywords,
-    openGraph: {
-      title: fullTitle,
-      description,
-      url,
-      siteName: SITE_NAME,
-      locale: 'en_GH',
-      type: 'website'
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: fullTitle,
-      description
-    },
-    alternates: {
-      canonical: url
-    }
-  };
-}
+export const buildPageMetadata = (title: string, description: string): Metadata => ({
+  title,
+  description,
+  openGraph: { title: `${title} | Prep N Prime GH`, description },
+  twitter: { title: `${title} | Prep N Prime GH`, description }
+});

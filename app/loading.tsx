@@ -1,7 +1,3 @@
 export default function Loading() {
-  return (
-    <div className="container-shell py-20">
-      <p className="text-sm text-[var(--color-muted)]">Loading Condolence GH...</p>
-    </div>
-  );
+  return <div className='mx-auto max-w-7xl px-4 py-24 text-stone-600 md:px-6'>Loading Prep N Prime GH...</div>;
 }

@@ -1,19 +1,15 @@
 import Image from 'next/image';
+import { SedifexGalleryItem } from '@/lib/types';
 
-type GalleryItem = {
-  src: string;
-  alt: string;
-};
-
-export function GalleryGrid({ items }: { items: GalleryItem[] }) {
+export function GalleryGrid({ items }: { items: SedifexGalleryItem[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item) => (
-        <figure key={item.src} className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-          <div className="relative h-56 w-full">
-            <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 1024px) 50vw, 33vw" />
+    <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3'>
+      {items.map((item, index) => (
+        <figure key={`${item.url}-${index}`} className='overflow-hidden rounded-2xl border border-stone-200 bg-white'>
+          <div className='relative h-52'>
+            <Image src={item.url || '/images/placeholder-beauty.svg'} alt={item.alt || 'Beauty shop gallery image'} fill className='object-cover' />
           </div>
-          <figcaption className="p-4 text-sm text-[var(--color-muted)]">{item.alt}</figcaption>
+          {item.caption ? <figcaption className='p-3 text-sm text-stone-600'>{item.caption}</figcaption> : null}
         </figure>
       ))}
     </div>
