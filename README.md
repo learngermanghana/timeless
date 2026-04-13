@@ -28,12 +28,16 @@ Production-ready Next.js App Router website for **Prep N Prime GH**, a Ghana bea
 Server-side integration is implemented in `lib/sedifex.ts`.
 
 Endpoints used:
-- `GET /integrationProducts?storeId=<storeId>`
-- `GET /integrationPromo?storeId=<storeId>` (optional)
+- `GET /v1IntegrationProducts?storeId=<storeId>`
+- `GET /v1IntegrationPromo?storeId=<storeId>` (optional)
 - `GET /integrationGallery?storeId=<storeId>` (optional)
 
+Required headers:
+- `x-api-key: <SEDIFEX_INTEGRATION_API_KEY or SEDIFEX_INTEGRATION_KEY>`
+- `X-Sedifex-Contract-Version: 2026-04-13` (or `SEDIFEX_CONTRACT_VERSION`)
+
 Features:
-- Bearer auth header with integration key
+- Contract-versioned integration requests (header, not URL path)
 - `next: { revalidate: 60 }`
 - Product deduplication by `id|storeId|name|price`
 - Fallback sample data when API is unavailable
@@ -45,7 +49,9 @@ Copy `.env.example` to `.env.local`:
 ```bash
 SEDIFEX_API_BASE_URL=
 SEDIFEX_STORE_ID=
+SEDIFEX_INTEGRATION_API_KEY=
 SEDIFEX_INTEGRATION_KEY=
+SEDIFEX_CONTRACT_VERSION=2026-04-13
 ```
 
 ## Local Development
