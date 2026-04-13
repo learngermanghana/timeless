@@ -1,17 +1,13 @@
-import type { Metadata } from 'next';
-import { Breadcrumb } from '@/components/breadcrumb';
-import { buildMetadata } from '@/lib/metadata';
+import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = buildMetadata('Privacy Policy', 'Read the Condolence GH privacy policy for how enquiry details and customer information are handled.', '/privacy-policy');
+export const metadata = buildPageMetadata('Privacy Policy', 'How Prep N Prime GH handles customer data and enquiry information.');
 
 export default function PrivacyPolicyPage() {
   return (
-    <section className="container-shell space-y-5 py-10">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} />
-      <h1 className="text-3xl font-semibold">Privacy Policy</h1>
-      <p className="text-sm text-[var(--color-muted)]">Condolence GH collects only the information required to respond to enquiries, prepare print estimates, and deliver completed jobs. We may store contact details, artwork files, and communication history for service execution and quality assurance.</p>
-      <p className="text-sm text-[var(--color-muted)]">We do not sell personal data. Customer data may be shared with trusted logistics or production partners only where necessary for job fulfilment. You may request update or deletion of your contact information by emailing our support team.</p>
-      <p className="text-sm text-[var(--color-muted)]">By using this website, you consent to this policy and to reasonable updates made for legal or operational purposes.</p>
+    <section className='mx-auto max-w-4xl space-y-4 px-4 py-14 text-stone-700 md:px-6'>
+      <h1 className='text-3xl font-semibold text-stone-900'>Privacy Policy</h1>
+      <p>We collect only the personal information needed to process enquiries and orders, including contact details and product preferences.</p>
+      <p>We do not sell personal data. You may request updates or deletion of your data by contacting us.</p>
     </section>
   );
 }

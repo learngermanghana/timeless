@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#f6eee8"/>
+  <circle cx="300" cy="250" r="120" fill="#efd8cd"/>
+  <circle cx="860" cy="600" r="180" fill="#f1dfe5"/>
+  <text x="80" y="820" fill="#6a5146" font-size="42" font-family="Arial">Prep N Prime GH</text>
+</svg>

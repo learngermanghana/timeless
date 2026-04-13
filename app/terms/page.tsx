@@ -1,17 +1,13 @@
-import type { Metadata } from 'next';
-import { Breadcrumb } from '@/components/breadcrumb';
-import { buildMetadata } from '@/lib/metadata';
+import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = buildMetadata('Terms of Service', 'Review the Condolence GH terms for funeral and memorial printing orders in Ghana.', '/terms');
+export const metadata = buildPageMetadata('Terms', 'Terms of use and ordering terms for Prep N Prime GH.');
 
 export default function TermsPage() {
   return (
-    <section className="container-shell space-y-5 py-10">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Terms' }]} />
-      <h1 className="text-3xl font-semibold">Terms of Service</h1>
-      <p className="text-sm text-[var(--color-muted)]">Quotes are valid for 7 days unless otherwise stated. Production begins after content confirmation and payment agreement. Turnaround times depend on file readiness, quantity, and finishing.</p>
-      <p className="text-sm text-[var(--color-muted)]">Customers are responsible for final proofreading and approval of names, dates, and service details before print. Approved artwork cannot be fully refunded once production has started.</p>
-      <p className="text-sm text-[var(--color-muted)]">Delivery timelines are estimates and may vary due to external logistics conditions. By placing an order, you agree to these terms and any approved job-specific quotation terms.</p>
+    <section className='mx-auto max-w-4xl space-y-4 px-4 py-14 text-stone-700 md:px-6'>
+      <h1 className='text-3xl font-semibold text-stone-900'>Terms & Conditions</h1>
+      <p>Product availability and pricing may change without notice. Orders are confirmed after direct communication.</p>
+      <p>Customers should follow usage directions and patch-test new products where necessary.</p>
     </section>
   );
 }

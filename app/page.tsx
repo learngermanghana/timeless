@@ -1,63 +1,76 @@
 import Link from 'next/link';
 import { HeroSection } from '@/components/hero-section';
 import { SectionHeading } from '@/components/section-heading';
-import { ServiceCard } from '@/components/service-card';
+import { CategoryCard } from '@/components/category-card';
 import { ProductCard } from '@/components/product-card';
+import { TestimonialCard } from '@/components/testimonial-card';
 import { CtaBanner } from '@/components/cta-banner';
+import { PromoBanner } from '@/components/promo-banner';
 import { GalleryGrid } from '@/components/gallery-grid';
 import { FaqList } from '@/components/faq-list';
-import { services, products, galleryItems, faqItems } from '@/lib/data';
+import { NewsletterBox } from '@/components/newsletter-box';
+import { getSedifexGallery, getSedifexProducts, getSedifexPromo } from '@/lib/sedifex';
+import { buildPageMetadata } from '@/lib/metadata';
 
-export default function HomePage() {
+export const metadata = buildPageMetadata(
+  'Home',
+  'Premium beauty shop in Ghana for body products and skincare with WhatsApp ordering and consultation support.'
+);
+
+export default async function HomePage() {
+  const [products, promo, gallery] = await Promise.all([
+    getSedifexProducts(),
+    getSedifexPromo(),
+    getSedifexGallery()
+  ]);
+
   return (
-    <div className="container-shell space-y-16 py-8 sm:py-12">
-      <HeroSection />
-
-      <section className="space-y-8">
-        <SectionHeading eyebrow="Core Services" title="Complete funeral printing support" description="From obituary brochures to event banners, we provide coordinated print solutions for funerals, one-week observance, and thanksgiving services." />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{services.slice(0, 6).map((service) => <ServiceCard key={service.title} {...service} />)}</div>
+    <div className='space-y-16 pb-20'>
+      <HeroSection promo={promo} />
+      <section className='mx-auto max-w-7xl px-4 md:px-6'>
+        <SectionHeading eyebrow='Categories' title='Shop by beauty category' description='Explore top categories curated for body care and skincare needs.' />
+        <div className='mt-6 grid gap-4 md:grid-cols-3'>
+          <CategoryCard title='Body Care' description='Lotions, oils, scrubs and moisturizing essentials.' href='/body-care' />
+          <CategoryCard title='Skin Care' description='Cleansers, toners, serums, moisturizers and sunscreen.' href='/skin-care' />
+          <CategoryCard title='Sensitive Skin' description='Comfort-first picks for delicate and reactive skin.' href='/sensitive-skin' />
+          <CategoryCard title='Glow Essentials' description='Brightening and hydration favorites for radiant skin.' href='/glow-products' />
+          <CategoryCard title='Daily Care' description='Reliable everyday routines for healthy looking skin.' href='/collections' />
+        </div>
       </section>
 
-      <section className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
-        <SectionHeading title="Why families and planners choose us" />
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {['Respectful design guidance', 'Fast turnaround for urgent timelines', 'Color-accurate premium printing', 'Pickup and delivery support in Accra'].map((item) => (
-            <p key={item} className="rounded-2xl bg-[var(--color-ivory)] p-4 text-sm text-[var(--color-muted)]">{item}</p>
+      <section className='mx-auto max-w-7xl px-4 md:px-6'>
+        <SectionHeading eyebrow='Best Sellers' title='Featured products' description='Popular picks from our current catalog.' />
+        <div className='mt-6 grid gap-5 md:grid-cols-3'>
+          {products.slice(0, 6).map((product) => (
+            <ProductCard key={`${product.id}-${product.name}`} product={product} />
           ))}
         </div>
       </section>
 
-      <section className="space-y-8">
-        <SectionHeading eyebrow="Featured" title="Popular print options" />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{products.map((product) => <ProductCard key={product.title} {...product} />)}</div>
-      </section>
-
-      <section className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
-        <SectionHeading eyebrow="How It Works" title="A simple process during sensitive times" />
-        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {['Share details and photos', 'Approve draft design', 'Print and finishing', 'Pickup or delivery'].map((step, i) => (
-            <li key={step} className="rounded-2xl bg-[var(--color-ivory)] p-4 text-sm"><span className="font-semibold">0{i + 1}.</span> {step}</li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="space-y-8">
-        <div className="flex items-end justify-between gap-4">
-          <SectionHeading className="mx-0 text-left" title="Gallery preview" description="A look at our memorial-themed print quality and finishing." />
-          <Link href="/gallery" className="text-sm font-medium text-[var(--color-accent)] hover:underline">View full gallery</Link>
+      <section className='mx-auto max-w-7xl px-4 md:px-6'>
+        <SectionHeading title='Why shop with Prep N Prime GH' />
+        <div className='mt-6 grid gap-4 md:grid-cols-3'>
+          <TestimonialCard quote='Authentic products from trusted lines only.' name='Authenticity first' />
+          <TestimonialCard quote='Friendly consultation support before purchase.' name='Consultation-led' />
+          <TestimonialCard quote='Easy order process through WhatsApp and phone.' name='Customer-friendly' />
         </div>
-        <GalleryGrid items={galleryItems.slice(0, 3)} />
       </section>
 
-      <section className="space-y-6">
-        <div className="flex items-end justify-between gap-4">
-          <SectionHeading className="mx-0 text-left" title="Frequently asked questions" />
-          <Link href="/faq" className="text-sm font-medium text-[var(--color-accent)] hover:underline">See all FAQs</Link>
-        </div>
-        <FaqList items={faqItems.slice(0, 3)} />
+      <section className='mx-auto max-w-7xl px-4 md:px-6'><CtaBanner /></section>
+      <section className='mx-auto max-w-7xl px-4 md:px-6'><PromoBanner promo={promo} /></section>
+
+      <section className='mx-auto max-w-7xl space-y-6 px-4 md:px-6'>
+        <SectionHeading title='Store gallery' description='A quick look at our clean beauty style and product displays.' />
+        <GalleryGrid items={gallery.slice(0, 6)} />
       </section>
 
-      <CtaBanner title="Need urgent funeral printing support?" description="Speak with Condolence GH now for fast and respectful print coordination in Accra and across Ghana." />
+      <section className='mx-auto max-w-7xl space-y-6 px-4 md:px-6'>
+        <SectionHeading title='FAQs' />
+        <FaqList />
+        <Link href='/faq' className='text-sm font-medium text-rose-600'>View all FAQs →</Link>
+      </section>
+
+      <section className='mx-auto max-w-7xl px-4 md:px-6'><NewsletterBox /></section>
     </div>
   );
 }
