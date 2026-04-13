@@ -57,11 +57,17 @@ export default async function HomePage() {
       </section>
 
       <section className='mx-auto max-w-7xl px-4 md:px-6'><CtaBanner /></section>
-      <section className='mx-auto max-w-7xl px-4 md:px-6'><PromoBanner promo={promo} /></section>
 
-      <section className='mx-auto max-w-7xl space-y-6 px-4 md:px-6'>
-        <SectionHeading title='Store gallery' description='A quick look at our clean beauty style and product displays.' />
-        <GalleryGrid items={gallery.slice(0, 6)} />
+      <section className='mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-2 md:px-6'>
+        <div className='space-y-6'>
+          <SectionHeading title='Special promo' description='Latest integration promo from Sedifex.' />
+          <PromoBanner promo={promo} />
+        </div>
+
+        <div className='space-y-6'>
+          <SectionHeading title='Store gallery' description='Latest integration gallery from Sedifex.' />
+          <GalleryGrid items={gallery.slice(0, 6)} />
+        </div>
       </section>
 
       <section className='mx-auto max-w-7xl space-y-6 px-4 md:px-6'>
