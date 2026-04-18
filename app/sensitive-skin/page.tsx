@@ -3,7 +3,7 @@ import { ProductCard } from '@/components/product-card';
 import { buildPageMetadata } from '@/lib/metadata';
 import { getSedifexProducts } from '@/lib/sedifex';
 
-export const metadata = buildPageMetadata('Sensitive Skin', 'Gentle skincare products for sensitive skin in Ghana.');
+export const metadata = buildPageMetadata('Sensitive Skin', 'Gentle skincare products for sensitive skin in Ghana.', '/sensitive-skin');
 
 export default async function SensitiveSkinPage() {
   const products = await getSedifexProducts();

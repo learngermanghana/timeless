@@ -4,7 +4,7 @@ import { SectionHeading } from '@/components/section-heading';
 import { buildPageMetadata } from '@/lib/metadata';
 import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_LINK } from '@/lib/constants';
 
-export const metadata = buildPageMetadata('Contact', 'Call or WhatsApp Prep N Prime GH for skincare and body care enquiries.');
+export const metadata = buildPageMetadata('Contact', 'Call or WhatsApp Prep N Prime GH for skincare and body care enquiries.', '/contact');
 
 export default function ContactPage() {
   return (

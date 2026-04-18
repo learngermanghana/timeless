@@ -1,6 +1,6 @@
 import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata = buildPageMetadata('Terms', 'Terms of use and ordering terms for Prep N Prime GH.');
+export const metadata = buildPageMetadata('Terms', 'Terms of use and ordering terms for Prep N Prime GH.', '/terms');
 
 export default function TermsPage() {
   return (

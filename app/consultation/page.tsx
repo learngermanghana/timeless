@@ -3,7 +3,7 @@ import { SectionHeading } from '@/components/section-heading';
 import { WHATSAPP_LINK } from '@/lib/constants';
 import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata = buildPageMetadata('Consultation', 'Request professional skincare and body care guidance from Prep N Prime GH.');
+export const metadata = buildPageMetadata('Consultation', 'Request professional skincare and body care guidance from Prep N Prime GH.', '/consultation');
 
 export default function ConsultationPage() {
   return (

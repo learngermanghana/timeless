@@ -2,7 +2,7 @@ import { FaqList } from '@/components/faq-list';
 import { SectionHeading } from '@/components/section-heading';
 import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata = buildPageMetadata('FAQ', 'Frequently asked questions about ordering, consultations, and product authenticity.');
+export const metadata = buildPageMetadata('FAQ', 'Frequently asked questions about ordering, consultations, and product authenticity.', '/faq');
 
 export default function FaqPage() {
   return (

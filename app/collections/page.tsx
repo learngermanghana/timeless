@@ -2,7 +2,7 @@ import { CollectionGrid } from '@/components/collection-grid';
 import { SectionHeading } from '@/components/section-heading';
 import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata = buildPageMetadata('Collections', 'Curated skincare and body care bundles for glow, hydration, and sensitive skin.');
+export const metadata = buildPageMetadata('Collections', 'Curated skincare and body care bundles for glow, hydration, and sensitive skin.', '/collections');
 
 export default function CollectionsPage() {
   return (
