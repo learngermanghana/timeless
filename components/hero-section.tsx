@@ -14,10 +14,10 @@ export function HeroSection({ promo }: { promo?: SedifexPromo }) {
             <Link href='/shop' className='rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white'>Shop Products</Link>
             <a href={WHATSAPP_LINK} target='_blank' rel='noreferrer' className='rounded-full border border-stone-300 px-6 py-3 text-sm font-medium text-stone-900'>Chat on WhatsApp</a>
           </div>
-          {promo?.promoTitle ? (
+          {promo?.title ? (
             <div className='rounded-2xl border border-rose-100 bg-white p-4'>
-              <p className='font-medium text-stone-900'>{promo.promoTitle}</p>
-              <p className='text-sm text-stone-600'>{promo.promoSummary}</p>
+              <p className='font-medium text-stone-900'>{promo.title}</p>
+              <p className='text-sm text-stone-600'>{promo.summary}</p>
             </div>
           ) : null}
         </div>

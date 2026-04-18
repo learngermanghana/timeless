@@ -48,9 +48,9 @@ export const fallbackProducts: SedifexProduct[] = [
 ];
 
 export const fallbackPromo: SedifexPromo = {
-  promoTitle: 'Free Skin Consultation Week',
-  promoSummary: 'Get tailored recommendations before you buy your next routine.',
-  promoWebsiteUrl:
+  title: 'Free Skin Consultation Week',
+  summary: 'Get tailored recommendations before you buy your next routine.',
+  websiteUrl:
     'https://wa.me/233244680516?text=Hi%20Prep%20N%20Prime%20GH%2C%20I%20want%20a%20free%20skin%20consultation.'
 };
 
