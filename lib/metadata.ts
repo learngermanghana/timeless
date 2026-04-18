@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
-const baseUrl = 'https://prep-n-prime-gh.vercel.app';
+const baseUrl = 'https://www.prepnprimegh.com';
+
+const buildCanonicalUrl = (path = '/') => new URL(path, baseUrl).toString();
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -18,8 +20,12 @@ export const defaultMetadata: Metadata = {
     'sunscreen Ghana',
     'face cleanser Ghana',
     'body lotion Ghana',
-    'serums and skincare Ghana'
+    'serums and skincare Ghana',
+    'Prep N Prime GH'
   ],
+  alternates: {
+    canonical: '/'
+  },
   openGraph: {
     title: 'Prep N Prime GH',
     description:
@@ -33,12 +39,29 @@ export const defaultMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'Prep N Prime GH',
     description: 'Body care and skincare made simple, premium, and authentic.'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1
+    }
   }
 };
 
-export const buildPageMetadata = (title: string, description: string): Metadata => ({
-  title,
-  description,
-  openGraph: { title: `${title} | Prep N Prime GH`, description },
-  twitter: { title: `${title} | Prep N Prime GH`, description }
-});
+export const buildPageMetadata = (title: string, description: string, path = '/'): Metadata => {
+  const canonical = buildCanonicalUrl(path);
+  const brandedTitle = `${title} | Prep N Prime GH`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: { title: brandedTitle, description, url: canonical },
+    twitter: { title: brandedTitle, description }
+  };
+};

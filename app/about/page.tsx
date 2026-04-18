@@ -1,7 +1,7 @@
 import { SectionHeading } from '@/components/section-heading';
 import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata = buildPageMetadata('About', 'Learn about Prep N Prime GH, a trusted beauty shop in Ghana.');
+export const metadata = buildPageMetadata('About', 'Learn about Prep N Prime GH, a trusted beauty shop in Ghana.', '/about');
 
 export default function AboutPage() {
   return (

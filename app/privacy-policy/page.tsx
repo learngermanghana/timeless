@@ -1,6 +1,6 @@
 import { buildPageMetadata } from '@/lib/metadata';
 
-export const metadata = buildPageMetadata('Privacy Policy', 'How Prep N Prime GH handles customer data and enquiry information.');
+export const metadata = buildPageMetadata('Privacy Policy', 'How Prep N Prime GH handles customer data and enquiry information.', '/privacy-policy');
 
 export default function PrivacyPolicyPage() {
   return (

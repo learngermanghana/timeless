@@ -3,7 +3,7 @@ import { ProductCard } from '@/components/product-card';
 import { buildPageMetadata } from '@/lib/metadata';
 import { getSedifexProducts } from '@/lib/sedifex';
 
-export const metadata = buildPageMetadata('Glow Products', 'Glow and hydration skincare products from Prep N Prime GH.');
+export const metadata = buildPageMetadata('Glow Products', 'Glow and hydration skincare products from Prep N Prime GH.', '/glow-products');
 
 export default async function GlowProductsPage() {
   const products = await getSedifexProducts();

@@ -14,7 +14,8 @@ import { buildPageMetadata } from '@/lib/metadata';
 
 export const metadata = buildPageMetadata(
   'Home',
-  'Premium beauty shop in Ghana for body products and skincare with WhatsApp ordering and consultation support.'
+  'Premium beauty shop in Ghana for body products and skincare with WhatsApp ordering and consultation support.',
+  '/'
 );
 
 export default async function HomePage() {

@@ -3,7 +3,7 @@ import { ProductCard } from '@/components/product-card';
 import { buildPageMetadata } from '@/lib/metadata';
 import { getSedifexProducts } from '@/lib/sedifex';
 
-export const metadata = buildPageMetadata('Skin Care', 'Shop cleansers, toners, serums, moisturizers, and sunscreen in Ghana.');
+export const metadata = buildPageMetadata('Skin Care', 'Shop cleansers, toners, serums, moisturizers, and sunscreen in Ghana.', '/skin-care');
 
 export default async function SkinCarePage() {
   const products = await getSedifexProducts();
