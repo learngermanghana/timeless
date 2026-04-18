@@ -14,17 +14,26 @@ export type SedifexProduct = {
 };
 
 export type SedifexPromo = {
-  promoTitle?: string;
-  promoSummary?: string;
-  promoStartDate?: string;
-  promoEndDate?: string;
-  promoSlug?: string;
-  promoWebsiteUrl?: string;
-  displayName?: string;
-  name?: string;
+  enabled?: boolean;
+  slug?: string;
+  title?: string;
+  summary?: string;
+  startDate?: string;
+  endDate?: string;
+  websiteUrl?: string | null;
+  youtubeUrl?: string | null;
+  youtubeEmbedUrl?: string | null;
+  youtubeChannelId?: string | null;
+  youtubeVideos?: string[];
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  phone?: string;
+  storeName?: string;
+  updatedAt?: string;
 };
 
 export type SedifexGalleryItem = {
+  id?: string;
   url?: string;
   alt?: string;
   caption?: string;
@@ -40,8 +49,10 @@ export type IntegrationProductsResponse = {
 
 export type IntegrationPromoResponse = {
   promo?: SedifexPromo;
+  storeId?: string;
 };
 
 export type IntegrationGalleryResponse = {
-  items?: SedifexGalleryItem[];
+  gallery?: SedifexGalleryItem[];
+  storeId?: string;
 };

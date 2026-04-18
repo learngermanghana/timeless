@@ -42,18 +42,22 @@ function normalizePromoRecord(raw: unknown): SedifexPromo | null {
   if (!raw || typeof raw !== 'object') return null;
 
   const candidate = raw as Record<string, unknown>;
-  const promoTitle = typeof candidate.promoTitle === 'string' ? candidate.promoTitle : undefined;
-  if (!promoTitle) return null;
+  const title = typeof candidate.title === 'string' ? candidate.title : undefined;
+  if (!title) return null;
 
   return {
-    promoTitle,
-    promoSummary: typeof candidate.promoSummary === 'string' ? candidate.promoSummary : undefined,
-    promoStartDate: typeof candidate.promoStartDate === 'string' ? candidate.promoStartDate : undefined,
-    promoEndDate: typeof candidate.promoEndDate === 'string' ? candidate.promoEndDate : undefined,
-    promoSlug: typeof candidate.promoSlug === 'string' ? candidate.promoSlug : undefined,
-    promoWebsiteUrl: typeof candidate.promoWebsiteUrl === 'string' ? candidate.promoWebsiteUrl : undefined,
-    displayName: typeof candidate.displayName === 'string' ? candidate.displayName : undefined,
-    name: typeof candidate.name === 'string' ? candidate.name : undefined
+    enabled: typeof candidate.enabled === 'boolean' ? candidate.enabled : undefined,
+    slug: typeof candidate.slug === 'string' ? candidate.slug : undefined,
+    title,
+    summary: typeof candidate.summary === 'string' ? candidate.summary : undefined,
+    startDate: typeof candidate.startDate === 'string' ? candidate.startDate : undefined,
+    endDate: typeof candidate.endDate === 'string' ? candidate.endDate : undefined,
+    websiteUrl: typeof candidate.websiteUrl === 'string' ? candidate.websiteUrl : null,
+    imageUrl: typeof candidate.imageUrl === 'string' ? candidate.imageUrl : null,
+    imageAlt: typeof candidate.imageAlt === 'string' ? candidate.imageAlt : null,
+    phone: typeof candidate.phone === 'string' ? candidate.phone : undefined,
+    storeName: typeof candidate.storeName === 'string' ? candidate.storeName : undefined,
+    updatedAt: typeof candidate.updatedAt === 'string' ? candidate.updatedAt : undefined
   };
 }
 
@@ -67,6 +71,7 @@ function normalizeGalleryItems(raw: unknown): SedifexGalleryItem[] {
     if (!url) return items;
 
     items.push({
+      id: typeof record.id === 'string' ? record.id : undefined,
       url,
       alt: typeof record.alt === 'string' ? record.alt : undefined,
       caption: typeof record.caption === 'string' ? record.caption : undefined,
@@ -123,14 +128,12 @@ export async function getSedifexPromo() {
 export async function getSedifexGallery() {
   try {
     const result = await sedifexFetch<IntegrationGalleryResponse>('/integrationGallery');
-    const directItems = normalizeGalleryItems(result?.items);
-    const promoGalleryItems = normalizeGalleryItems((result as { promoGallery?: unknown } | null)?.promoGallery);
-    const gallery = directItems.length ? directItems : promoGalleryItems;
+    const gallery = normalizeGalleryItems(result?.gallery);
     if (!gallery.length) return fallbackGallery;
 
     return gallery
-      .filter((item) => item.isPublished)
-      .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+      .filter((item) => item.isPublished !== false)
+      .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
   } catch {
     return fallbackGallery;
   }
