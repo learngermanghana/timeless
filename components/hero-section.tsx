@@ -14,6 +14,14 @@ export function HeroSection({ promo }: { promo?: SedifexPromo }) {
             <Link href='/shop' className='rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white'>Shop Products</Link>
             <a href={WHATSAPP_LINK} target='_blank' rel='noreferrer' className='rounded-full border border-stone-300 px-6 py-3 text-sm font-medium text-stone-900'>Chat on WhatsApp</a>
           </div>
+          <a
+            href='https://sedifex.com/join-customers/81024e2769344036ad50747d'
+            target='_blank'
+            rel='noreferrer'
+            className='inline-flex text-sm font-medium text-rose-600 underline underline-offset-4'
+          >
+            Join our customer list
+          </a>
           {promo?.title ? (
             <div className='rounded-2xl border border-rose-100 bg-white p-4'>
               <p className='font-medium text-stone-900'>{promo.title}</p>

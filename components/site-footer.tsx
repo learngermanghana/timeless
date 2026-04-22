@@ -33,7 +33,17 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className='border-t border-stone-200 py-4 text-center text-xs text-stone-500'>© {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.</div>
+      <div className='border-t border-stone-200 px-4 py-4 text-center text-xs text-stone-500 md:px-6'>
+        <a
+          href='https://sedifex.com/join-customers/81024e2769344036ad50747d'
+          target='_blank'
+          rel='noreferrer'
+          className='mb-2 block text-sm font-medium text-rose-600 underline underline-offset-4'
+        >
+          Join our customer list
+        </a>
+        <p>© {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.</p>
+      </div>
     </footer>
   );
 }
