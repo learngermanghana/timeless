@@ -18,3 +18,51 @@ export const NAV_LINKS = [
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' }
 ] as const;
+
+export const ACTIVITY_NAMES = [
+  'Sandra',
+  'Ama',
+  'Abena',
+  'Mabel',
+  'Grace',
+  'Naa',
+  'Elsie',
+  'Priscilla',
+  'Adwoa',
+  'Esi'
+] as const;
+
+export const ACTIVITY_PRODUCTS = [
+  'Vitamin C serum',
+  'Turmeric body scrub',
+  'Shea butter lotion',
+  'Hydrating face cleanser',
+  'Niacinamide toner',
+  'Sunscreen SPF 50',
+  'Glow body oil',
+  'Dark spot corrector',
+  'Body wash duo',
+  'Moisture repair cream'
+] as const;
+
+export const ACTIVITY_LOCATIONS = [
+  'Accra',
+  'Kumasi',
+  'Tema',
+  'East Legon',
+  'Spintex',
+  'Takoradi',
+  'Cape Coast',
+  'Madina'
+] as const;
+
+export const ACTIVITY_TIME_TEXT = [
+  '2 mins ago',
+  '5 mins ago',
+  '8 mins ago',
+  '12 mins ago',
+  '18 mins ago',
+  '25 mins ago',
+  '31 mins ago',
+  '44 mins ago'
+] as const;

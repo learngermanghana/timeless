@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
+import { ActivityPopups } from '@/components/activity-popups';
 import { defaultMetadata } from '@/lib/metadata';
 import './globals.css';
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
+        <ActivityPopups />
         <Analytics />
         <SpeedInsights />
       </body>
