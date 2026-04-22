@@ -38,6 +38,19 @@ async function sedifexFetch<T>(endpoint: string): Promise<T | null> {
   return (await response.json()) as T;
 }
 
+async function sedifexFetchMany<T>(endpoints: string[]): Promise<T | null> {
+  for (const endpoint of endpoints) {
+    try {
+      const result = await sedifexFetch<T>(endpoint);
+      if (result) return result;
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
+}
+
 function normalizePromoRecord(raw: unknown): SedifexPromo | null {
   if (!raw || typeof raw !== 'object') return null;
 
@@ -67,7 +80,12 @@ function normalizeGalleryItems(raw: unknown): SedifexGalleryItem[] {
   return raw.reduce<SedifexGalleryItem[]>((items, item) => {
     if (!item || typeof item !== 'object') return items;
     const record = item as Record<string, unknown>;
-    const url = typeof record.url === 'string' ? record.url : undefined;
+    const mediaRecord = record.media && typeof record.media === 'object' ? (record.media as Record<string, unknown>) : null;
+    const url =
+      (typeof record.url === 'string' ? record.url : undefined) ??
+      (typeof record.imageUrl === 'string' ? record.imageUrl : undefined) ??
+      (typeof record.image === 'string' ? record.image : undefined) ??
+      (mediaRecord && typeof mediaRecord.url === 'string' ? mediaRecord.url : undefined);
     if (!url) return items;
 
     items.push({
@@ -127,8 +145,16 @@ export async function getSedifexPromo() {
 
 export async function getSedifexGallery() {
   try {
-    const result = await sedifexFetch<IntegrationGalleryResponse>('/integrationGallery');
-    const gallery = normalizeGalleryItems(result?.gallery);
+    const result = await sedifexFetchMany<IntegrationGalleryResponse | SedifexGalleryItem[]>([
+      '/integrationGallery',
+      '/v1IntegrationGallery'
+    ]);
+    const galleryPayload = Array.isArray(result)
+      ? result
+      : result && typeof result === 'object' && 'gallery' in result
+        ? result.gallery
+        : [];
+    const gallery = normalizeGalleryItems(galleryPayload);
     if (!gallery.length) return fallbackGallery;
 
     return gallery
