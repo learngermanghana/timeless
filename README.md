@@ -1,6 +1,6 @@
 # Prep N Prime GH Website
 
-Production-ready Next.js App Router website for **Prep N Prime GH**, a Ghana beauty and skincare shop.
+Production-ready Next.js App Router website for **Prep N Prime GH**, a Ghana beauty and skincare shop...
 
 ## Stack
 - Next.js (App Router) + TypeScript
