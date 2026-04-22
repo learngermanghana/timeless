@@ -41,6 +41,41 @@ export function ActivityPopups() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!activity) {
+      return;
+    }
+
+    const audioContext = new window.AudioContext();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.08, audioContext.currentTime + 0.02);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.2);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.2);
+
+    const timeoutId = setTimeout(() => {
+      void audioContext.close();
+    }, 350);
+
+    return () => {
+      clearTimeout(timeoutId);
+      try {
+        oscillator.disconnect();
+        gainNode.disconnect();
+      } catch {
+        // No-op cleanup guard.
+      }
+    };
+  }, [activity]);
+
   const message = useMemo(() => {
     if (!activity) {
       return '';
