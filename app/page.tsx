@@ -35,7 +35,7 @@ export default async function HomePage() {
         </div>
 
         <div className='space-y-6'>
-          <SectionHeading title='Store gallery' description='Latest integration gallery from Sedifex.' />
+          <SectionHeading title='Store gallery' description='Latest integration gallery from PrepNPrime.' />
           <GalleryGrid items={gallery.slice(0, 6)} />
         </div>
       </section>
