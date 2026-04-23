@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatGHS } from '@/lib/format';
 import { buildWhatsAppLink } from '@/lib/constants';
 import { SedifexProduct } from '@/lib/types';
@@ -9,9 +9,28 @@ import { SedifexProduct } from '@/lib/types';
 const fallback =
   'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80';
 
+function normalizeImageUrl(url?: string | null) {
+  if (!url) return fallback;
+
+  const trimmed = url.trim();
+  if (!trimmed) return fallback;
+
+  if (trimmed.startsWith('//')) return `https:${trimmed}`;
+  if (trimmed.startsWith('http://')) return `https://${trimmed.slice('http://'.length)}`;
+
+  return encodeURI(trimmed);
+}
+
 export function ProductCard({ product }: { product: SedifexProduct }) {
-  const imageSrc = useMemo(() => product.imageUrl || product.imageUrls?.[0] || fallback, [product.imageUrl, product.imageUrls]);
+  const imageSrc = useMemo(() => {
+    const preferredImage = product.imageUrl || product.imageUrls?.find((candidate) => Boolean(candidate?.trim())) || fallback;
+    return normalizeImageUrl(preferredImage);
+  }, [product.imageUrl, product.imageUrls]);
+
   const [resolvedImageSrc, setResolvedImageSrc] = useState(imageSrc);
+  useEffect(() => {
+    setResolvedImageSrc(imageSrc);
+  }, [imageSrc]);
 
   const description = product.description || 'Premium skincare and body care essential.';
   const shouldTruncate = description.length > 120;
