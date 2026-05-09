@@ -29,7 +29,7 @@ export function SiteFooter() {
           <ul className='mt-3 space-y-2 text-sm text-stone-600'>
             <li><a href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a></li>
             <li><a href={WHATSAPP_LINK}>WhatsApp Orders</a></li>
-            <li><a href='mailto:hello@prepnprimegh.com'>hello@prepnprimegh.com</a></li>
+            <li><a href='mailto:prepnprimegh@gmail.com'>prepnprimegh@gmail.com</a></li>
           </ul>
         </div>
       </div>
