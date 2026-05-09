@@ -13,7 +13,7 @@ export default function ContactPage() {
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
         <ContactCard title='Call' value={PHONE_DISPLAY} href={`tel:${PHONE_E164}`} />
         <ContactCard title='WhatsApp' value='Chat now' href={WHATSAPP_LINK} />
-        <ContactCard title='Email' value='hello@prepnprimegh.com' href='mailto:hello@prepnprimegh.com' />
+        <ContactCard title='Email' value='prepnprimegh@gmail.com' href='mailto:prepnprimegh@gmail.com' />
         <ContactCard title='Address' value='Accra, Ghana (placeholder)' />
       </div>
       <ConsultationForm />
