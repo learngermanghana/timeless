@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BRAND_NAME, PHONE_DISPLAY, PHONE_E164, WHATSAPP_LINK } from '@/lib/constants';
+import { BRAND_NAME, BUSINESS_ADDRESS, PHONE_DISPLAY, PHONE_E164, WHATSAPP_LINK } from '@/lib/constants';
 
 export function SiteFooter() {
   return (
@@ -30,6 +30,7 @@ export function SiteFooter() {
             <li><a href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a></li>
             <li><a href={WHATSAPP_LINK}>WhatsApp Orders</a></li>
             <li><a href='mailto:prepnprimegh@gmail.com'>prepnprimegh@gmail.com</a></li>
+            <li>{BUSINESS_ADDRESS}</li>
           </ul>
         </div>
       </div>
