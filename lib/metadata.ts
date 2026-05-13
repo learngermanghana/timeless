@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BUSINESS_ADDRESS } from '@/lib/constants';
 
 const baseUrl = 'https://www.prepnprimegh.com';
 
@@ -11,7 +12,7 @@ export const defaultMetadata: Metadata = {
     template: '%s | Prep N Prime GH'
   },
   description:
-    'Shop authentic body care and skincare products in Ghana. Prep N Prime GH offers premium products, glow essentials, and consultation-led shopping.',
+    `Shop authentic body care and skincare products in Ghana. Visit Prep N Prime GH at ${BUSINESS_ADDRESS} for premium products, glow essentials, and consultation-led shopping.`,
   keywords: [
     'beauty shop in Ghana',
     'skincare products Ghana',
@@ -21,7 +22,9 @@ export const defaultMetadata: Metadata = {
     'face cleanser Ghana',
     'body lotion Ghana',
     'serums and skincare Ghana',
-    'Prep N Prime GH'
+    'Prep N Prime GH',
+    'beauty shop Westland Haatso',
+    BUSINESS_ADDRESS
   ],
   alternates: {
     canonical: '/'
@@ -29,7 +32,7 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     title: 'Prep N Prime GH',
     description:
-      'Premium body products and skincare in Ghana with friendly consultation support.',
+      `Premium body products and skincare in Ghana with friendly consultation support at ${BUSINESS_ADDRESS}.`,
     type: 'website',
     locale: 'en_GH',
     url: baseUrl,
@@ -38,7 +41,7 @@ export const defaultMetadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Prep N Prime GH',
-    description: 'Body care and skincare made simple, premium, and authentic.'
+    description: `Body care and skincare made simple, premium, and authentic in Haatso at ${BUSINESS_ADDRESS}.`
   },
   robots: {
     index: true,

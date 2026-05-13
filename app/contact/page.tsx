@@ -2,9 +2,9 @@ import { ContactCard } from '@/components/contact-card';
 import { ConsultationForm } from '@/components/consultation-form';
 import { SectionHeading } from '@/components/section-heading';
 import { buildPageMetadata } from '@/lib/metadata';
-import { PHONE_DISPLAY, PHONE_E164, WHATSAPP_LINK } from '@/lib/constants';
+import { BUSINESS_ADDRESS, PHONE_DISPLAY, PHONE_E164, WHATSAPP_LINK } from '@/lib/constants';
 
-export const metadata = buildPageMetadata('Contact', 'Call or WhatsApp Prep N Prime GH for skincare and body care enquiries.', '/contact');
+export const metadata = buildPageMetadata('Contact', 'Visit Prep N Prime GH at 44 Ato Ahwoi Ave, Westland, Haatso, Ghana, or contact us for skincare and body care enquiries.', '/contact');
 
 export default function ContactPage() {
   return (
@@ -14,7 +14,7 @@ export default function ContactPage() {
         <ContactCard title='Call' value={PHONE_DISPLAY} href={`tel:${PHONE_E164}`} />
         <ContactCard title='WhatsApp' value='Chat now' href={WHATSAPP_LINK} />
         <ContactCard title='Email' value='prepnprimegh@gmail.com' href='mailto:prepnprimegh@gmail.com' />
-        <ContactCard title='Address' value='Accra, Ghana (placeholder)' />
+        <ContactCard title='Address' value={BUSINESS_ADDRESS} />
       </div>
       <ConsultationForm />
     </section>
