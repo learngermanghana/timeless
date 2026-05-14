@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { formatGHS } from '@/lib/format';
 import { buildWhatsAppLink } from '@/lib/constants';
 import { SedifexProduct } from '@/lib/types';
+import { getStableProductSlug } from '@/lib/product-slug';
 
 const fallback =
   'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80';
@@ -32,6 +34,7 @@ export function ProductCard({ product }: { product: SedifexProduct }) {
     setResolvedImageSrc(imageSrc);
   }, [imageSrc]);
 
+  const slug = getStableProductSlug(product);
   const description = product.description || 'Premium skincare and body care essential.';
   const shouldTruncate = description.length > 120;
   const shortDescription = shouldTruncate ? `${description.slice(0, 120).trimEnd()}...` : description;
@@ -50,7 +53,11 @@ export function ProductCard({ product }: { product: SedifexProduct }) {
       </div>
       <div className='space-y-3 p-5'>
         <p className='text-xs uppercase tracking-[0.2em] text-rose-500'>{product.category || 'Beauty Care'}</p>
-        <h3 className='text-lg font-semibold text-stone-900'>{product.name}</h3>
+        <h3 className='text-lg font-semibold text-stone-900'>
+          <Link href={`/shop/${slug}`} className='hover:underline'>
+            {product.name}
+          </Link>
+        </h3>
         <p className='text-sm text-stone-600'>
           {shortDescription}
           {shouldTruncate && <span className='ml-1 font-medium text-stone-800'>Read more</span>}
